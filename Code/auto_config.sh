@@ -121,6 +121,14 @@ EOF
             # Instalação do Vitals
             git clone https://github.com/corecoding/Vitals.git ~/.local/share/gnome-shell/extensions/Vitals@CoreCoding.com -b develop
             sudo apt install gnome-shell-extension-manager gir1.2-gtop-2.0 lm-sensors -y
+            #Instalação do Pop-os/Shell
+            sudo apt install git node-typescript make gnome-shell-extension-prefs
+            git clone https://github.com/pop-os/shell.git
+            cd shell
+            git checkout master_noble
+            make local-install
+            clear
+            sleep 2
             #PapelDeParede
             mkdir -p "$HOME/Pictures/Wallpaper"
             wget -q -O "$HOME/Pictures/Wallpaper/mountain-abstract.jpg" "https://iili.io/qO6izYu.jpg"
@@ -158,11 +166,15 @@ EOF
             cd /tmp/Colloid-icons
             ./install.sh -s default
             gsettings set org.gnome.desktop.interface icon-theme 'Colloid-Dark'
+            #Ativar pop-shell
+            gnome-extensions enable pop-shell@system76.com
             echo "Tema instalado e aplicado!"
             ;;
         7)
             # Baixar e instalar o ZSH + Tema duellj
             echo "Instalando e configurando o ZSH..."
+            sudo sed -i 's/http:\/\/br.archive.ubuntu.com/http:\/\/archive.ubuntu.com/g' /etc/apt/sources.list.d/ubuntu.sources
+            sudo rm -rf /var/lib/apt/lists/*
             sudo apt update && sudo apt install zsh git curl -y
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
             git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
