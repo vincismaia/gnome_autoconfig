@@ -121,6 +121,7 @@ EOF
             # Instalação do Vitals
             git clone https://github.com/corecoding/Vitals.git ~/.local/share/gnome-shell/extensions/Vitals@CoreCoding.com -b develop
             sudo apt install gnome-shell-extension-manager gir1.2-gtop-2.0 lm-sensors -y
+            gnome-extensions enable Vitals@CoreCoding.com
             #Instalação do Pop-os/Shell
             sudo apt install git node-typescript make gnome-shell-extension-prefs -y
             git clone https://github.com/pop-os/shell.git
