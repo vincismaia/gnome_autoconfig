@@ -163,8 +163,6 @@ EOF
         7)
             # Baixar e instalar o ZSH + Tema duellj
             echo "Instalando e configurando o ZSH..."
-            sudo sed -i 's/http:\/\/br.archive.ubuntu.com/http:\/\/archive.ubuntu.com/g' /etc/apt/sources.list.d/ubuntu.sources
-            sudo rm -rf /var/lib/apt/lists/*
             sudo apt update && sudo apt install zsh git curl -y
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
             git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
