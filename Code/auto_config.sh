@@ -144,9 +144,9 @@ EOF
             sleep 1
             #FlatRemixTheme
             git clone https://github.com/daniruiz/flat-remix-gtk.git ~/.themes/FlatRemix
-            cp -r ~/.themes/FlatRemix/themes/Flat-Remix-GTK-Blue-Darkest/ ~/.themes/
-            cp -r ~/.themes/FlatRemix/themes/Flat-Remix-GTK-Blue-Darkest/libadwaita* ~/.config/gtk-4.0
-            gsettings set org.gnome.desktop.interface gtk-theme "Flat-Remix-GTK-Blue-Darkest"
+            cp -r ~/.themes/FlatRemix/themes/Flat-Remix-GTK-Blue-Dark/ ~/.themes/
+            cp -r ~/.themes/FlatRemix/themes/Flat-Remix-GTK-Blue-Dark/libadwaita* ~/.config/gtk-4.0
+            gsettings set org.gnome.desktop.interface gtk-theme "Flat-Remix-GTK-Blue-Dark"
             clear
             echo "O sistema fará logout em 5 segundos para registrar as extensões."
             sleep 5
@@ -168,12 +168,11 @@ EOF
             gsettings set org.gnome.desktop.interface gtk-theme "$TEMA_MARBLE"
             clear
             sleep 2
-            # Baixar e instalar o tema de ícones Colloid
-            echo "Baixando o tema de ícones Colloid..."
-            git clone https://github.com/vinceliuice/Colloid-icon-theme.git /tmp/Colloid-icons
-            cd /tmp/Colloid-icons
-            ./install.sh -s default
-            gsettings set org.gnome.desktop.interface icon-theme 'Colloid-Dark'
+            # Baixar e instalar o tema de ícones Flat-Remix-Blue-Dark
+            echo "Baixando o tema de ícones Flat-Remix-Blue-Dark..."
+            git clone https://github.com/daniruiz/flat-remix.git /tmp/FlatRemixIcons
+            cp -r /tmp/FlatRemixIcons/Flat-Remix-Blue-Dark ~/.local/share/icons/Flat-Remix-Blue-Dark
+            gsettings set org.gnome.desktop.interface icon-theme 'Flat-Remix-Blue-Dark'
             clear
             #Ativar pop-shell
             gnome-extensions enable pop-shell@system76.com
