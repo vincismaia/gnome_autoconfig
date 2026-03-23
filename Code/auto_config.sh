@@ -51,9 +51,11 @@ while true; do
             sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y
             sudo apt install htop git curl wget software-properties-common apt-transport-https net-tools iputils-ping traceroute nmap socat flatpak gnome-tweaks gnome-calendar vim python3 gnome-shell-extensions gnome-shell-extension-manager gnome-boxes spice-vdagent fastfetch -y
             
-            echo "Configurando Mouse no GRUB..."
+            echo "Configurando touchpad no GRUB..."
             sudo sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash psmouse.synaptics_intertouch=1"/' /etc/default/grub
             sudo update-grub
+            clear
+            echo "Instalando Visual Studio Code"
             sudo snap install code --classic
             ;;
         3)
@@ -82,6 +84,7 @@ while true; do
             gsettings set org.gnome.shell favorite-apps "$(gsettings get org.gnome.shell favorite-apps | sed "s/]/, 'com.anydesk.Anydesk.desktop']/")"
             gsettings set org.gnome.shell favorite-apps "$(gsettings get org.gnome.shell favorite-apps | sed "s/]/, 'org.gnome.Calendar.desktop']/")"
             gsettings set org.gnome.shell favorite-apps "$(gsettings get org.gnome.shell favorite-apps | sed "s/\]$/, 'virtualbox.desktop']/")"
+            clear
 
             #Autostart
 #Thunderbird
@@ -118,10 +121,12 @@ EOF
             mkdir -p ~/.local/share/gnome-shell/extensions
             wget -q https://github.com/aunetx/blur-my-shell/releases/latest/download/blur-my-shell@aunetx.shell-extension.zip -O /tmp/blur.zip
             unzip -o /tmp/blur.zip -d ~/.local/share/gnome-shell/extensions/blur-my-shell@aunetx
+            clear
             # Instalação do Vitals
             git clone https://github.com/corecoding/Vitals.git ~/.local/share/gnome-shell/extensions/Vitals@CoreCoding.com -b develop
             sudo apt install gnome-shell-extension-manager gir1.2-gtop-2.0 lm-sensors -y
             gnome-extensions enable Vitals@CoreCoding.com
+            clear
             #Instalação do Pop-os/Shell
             sudo apt install git node-typescript make gnome-shell-extension-prefs -y
             git clone https://github.com/pop-os/shell.git
@@ -135,6 +140,7 @@ EOF
             wget -q -O "$HOME/Pictures/Wallpaper/mountain-abstract.jpg" "https://iili.io/qO6izYu.jpg"
             gsettings set org.gnome.desktop.background picture-uri-dark "file://$HOME/Pictures/Wallpaper/mountain-abstract.jpg"
             gsettings set org.gnome.desktop.background picture-uri "file://$HOME/Pictures/Wallpaper/mountain-abstract.jpg"
+            clear
             sleep 1
             #FlatRemixTheme
             git clone https://github.com/daniruiz/flat-remix-gtk.git ~/.themes/FlatRemix
@@ -160,6 +166,7 @@ EOF
             sleep 2
             gsettings set org.gnome.shell.extensions.user-theme name "$TEMA_MARBLE"
             gsettings set org.gnome.desktop.interface gtk-theme "$TEMA_MARBLE"
+            clear
             sleep 2
             # Baixar e instalar o tema de ícones Colloid
             echo "Baixando o tema de ícones Colloid..."
@@ -167,6 +174,7 @@ EOF
             cd /tmp/Colloid-icons
             ./install.sh -s default
             gsettings set org.gnome.desktop.interface icon-theme 'Colloid-Dark'
+            clear
             #Ativar pop-shell
             gnome-extensions enable pop-shell@system76.com
             echo "Tema instalado e aplicado!"
@@ -174,8 +182,6 @@ EOF
         7)
             # Baixar e instalar o ZSH + Tema duellj
             echo "Instalando e configurando o ZSH..."
-            sudo sed -i 's/http:\/\/br.archive.ubuntu.com/http:\/\/archive.ubuntu.com/g' /etc/apt/sources.list.d/ubuntu.sources
-            sudo rm -rf /var/lib/apt/lists/*
             sudo apt update && sudo apt install zsh git curl -y
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
             git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
