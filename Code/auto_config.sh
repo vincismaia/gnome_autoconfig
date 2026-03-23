@@ -171,7 +171,7 @@ EOF
             # Baixar e instalar o tema de ícones Flat-Remix-Blue-Dark
             echo "Baixando o tema de ícones Flat-Remix-Blue-Dark..."
             git clone https://github.com/daniruiz/flat-remix.git /tmp/FlatRemixIcons
-            cp -r /tmp/FlatRemixIcons/Flat-Remix-Blue-Dark ~/.local/share/icons/Flat-Remix-Blue-Dark
+            cp -r /tmp/FlatRemixIcons/Flat-Remix-Blue-Dark ~/.icons/Flat-Remix-Blue-Dark
             gsettings set org.gnome.desktop.interface icon-theme 'Flat-Remix-Blue-Dark'
             clear
             #Ativar pop-shell
