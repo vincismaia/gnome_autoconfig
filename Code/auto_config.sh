@@ -129,10 +129,11 @@ EOF
             clear
             #Instalação do Pop-os/Shell
             sudo apt install git node-typescript make gnome-shell-extension-prefs -y
-            git clone https://github.com/pop-os/shell.git
-            cd shell
+            git clone https://github.com/pop-os/shell.git /tmp/Pop-shell/
+            cd /tmp/Pop-shell/
             git checkout master_noble
             make local-install
+            sudo rm -rf /tmp/*
             clear
             sleep 2
             #PapelDeParede
@@ -171,8 +172,9 @@ EOF
             # Baixar e instalar o tema de ícones Flat-Remix-Blue-Dark
             echo "Baixando o tema de ícones Flat-Remix-Blue-Dark..."
             git clone https://github.com/daniruiz/flat-remix.git /tmp/FlatRemixIcons
-            cp -r /tmp/FlatRemixIcons/Flat-Remix-Blue-Dark ~/.icons/Flat-Remix-Blue-Dark
+            mkdir -p ~/.icons && cp -r /tmp/FlatRemixIcons/Flat-Remix-Blue-Dark ~/.icons/Flat-Remix-Blue-Dark
             gsettings set org.gnome.desktop.interface icon-theme 'Flat-Remix-Blue-Dark'
+            sudo rm -rf /tmp/*
             clear
             #Ativar pop-shell
             gnome-extensions enable pop-shell@system76.com
