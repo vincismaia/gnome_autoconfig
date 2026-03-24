@@ -6,15 +6,15 @@ exibir_menu() {
     echo "        MENU DE AUTOMAÇÃO 
          by @vincismaia"
     echo "=================================="
-    echo "0) Configurar Terminal"
-    echo "1) Atualizar pacotes"
-    echo "2) Instalar utilitários"
-    echo "3) Instalar pacotes Flatpak"
-    echo "4) Configurar GNOME"
-    echo "5) Instalar Temas e Extensões (Exige Logout)"
-    echo "6) Aplicar Temas (Após o Logout)"
-    echo "7) Instalar ZSH"
-    echo "8) Sair"
+    echo "1) Configurar Terminal"
+    echo "2) Atualizar pacotes"
+    echo "3) Instalar utilitários"
+    echo "4) Instalar pacotes Flatpak"
+    echo "5) Configurar GNOME"
+    echo "6) Instalar Temas e Extensões (Exige Logout)"
+    echo "7) Aplicar Temas (Após o Logout)"
+    echo "8) Instalar ZSH"
+    echo "9) Sair"
     echo "=================================="
     echo -n "Escolha uma opção: "
 }
@@ -24,7 +24,7 @@ while true; do
     read opcao
 
     case $opcao in
-        0)
+        1)
             echo "Configurando perfil do terminal..."
             PERFIL_ID=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d "'")
             PROFILE_PATH="org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${PERFIL_ID}/"
@@ -38,15 +38,19 @@ while true; do
             gsettings set "$PROFILE_PATH" background-transparency-percent 10
             gsettings set "$PROFILE_PATH" default-size-columns 148
             gsettings set "$PROFILE_PATH" default-size-rows 37
+            clear
+            echo "Opção 1 concluída. O terminal foi configurado"
             ;;
-        1)
+        2)
             echo "Atualizando pacotes do sistema..."
             sudo apt update && sudo apt full-upgrade -y
             sudo apt autoremove -y && sudo apt autoclean
             sudo apt install build-essential dkms -y
             sudo apt install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y
+            clear
+            echo "Opção 2 concluída. Os pacotes do sistema foram atualizados"
             ;;
-        2)
+        3)
             echo "Instalando utilitários..."
             sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y
             sudo apt install htop git curl wget software-properties-common apt-transport-https net-tools iputils-ping traceroute nmap socat flatpak gnome-tweaks gnome-calendar vim python3 gnome-shell-extensions gnome-shell-extension-manager gnome-boxes spice-vdagent fastfetch -y
@@ -57,8 +61,10 @@ while true; do
             clear
             echo "Instalando Visual Studio Code"
             sudo snap install code --classic
+            clear
+            echo "Opção 3 concluída. Os utilitários foram instalados"
             ;;
-        3)
+        4)
             echo "Configurando Flatpaks..."
             sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
             
@@ -98,8 +104,10 @@ X-GNOME-Autostart-enabled=true
 Name=Thunderbird Flatpak
 Comment=Iniciar Thunderbird na inicialização
 EOF
+            clear
+            echo "Opção 4 concluída. Os pacotes Flatpak foram instalados"
             ;;
-        4)
+        5)
             echo "Configurando o GNOME..."
             gsettings set org.gnome.shell.extensions.ding show-home false
             gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'br'), ('xkb', 'us')]"
@@ -112,8 +120,10 @@ EOF
             gsettings set org.gnome.desktop.interface show-battery-percentage true
             gsettings set org.gnome.desktop.session idle-delay 900
             gsettings set org.gnome.shell.extensions.ding start-corner 'top-left'
+            clear
+            echo "Opção 5 concluída. O GNOME foi configurado"
             ;;
-        5)
+        6)
             echo "Instalando Temas e Extensões..."
             sudo apt update && sudo apt install gnome-shell-extension-prefs -y
             
@@ -152,8 +162,10 @@ EOF
             echo "O sistema fará logout em 5 segundos para registrar as extensões."
             sleep 5
             gnome-session-quit --logout --no-prompt
+            clear
+            echo "Opção 6 concluída. Os Temas e as Extensões foram instaladas"
             ;;
-        6)
+        7)
             # Baixar e instalar o tem Marble-blue-dark
             echo "Aplicando Temas..."
             TEMA_MARBLE="Marble-blue-dark"
@@ -163,7 +175,7 @@ EOF
             
             gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com 2>/dev/null
             gnome-extensions enable blur-my-shell@aunetx 2>/dev/null
-            
+            clear
             sleep 2
             gsettings set org.gnome.shell.extensions.user-theme name "$TEMA_MARBLE"
             gsettings set org.gnome.desktop.interface gtk-theme "$TEMA_MARBLE"
@@ -178,17 +190,26 @@ EOF
             clear
             #Ativar pop-shell
             gnome-extensions enable pop-shell@system76.com
-            echo "Tema instalado e aplicado!"
+            clear
+            echo "Opção 7 concluída. Temas aplicados"
             ;;
-        7)
+        8)
             # Baixar e instalar o ZSH + Tema duellj
             echo "Instalando e configurando o ZSH..."
             sudo apt update && sudo apt install zsh git curl -y
+            clear
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+            clear
+            sleep 2
             git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+            clear
+            sleep 2
             git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+            clear
+            sleep 2
             sed -i 's/^ZSH_THEME=.*/ZSH_THEME="duellj"/' ~/.zshrc
             sed -i 's/^plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
+            clear
             sudo chsh -s $(which zsh) $USER
             clear
             echo "Configuração concluída!"
@@ -197,7 +218,7 @@ EOF
             gnome-session-quit --logout --no-prompt
             ;;    
 
-        8) exit 0 ;;
+        9) exit 0 ;;
         *) echo "Opção inválida!" ;;
     esac
     
