@@ -148,9 +148,9 @@ EOF
             sleep 2
             #PapelDeParede
             mkdir -p "$HOME/Pictures/Wallpaper"
-            wget -q -O "$HOME/Pictures/Wallpaper/mountain-abstract.jpg" "https://iili.io/qO6izYu.jpg"
-            gsettings set org.gnome.desktop.background picture-uri-dark "file://$HOME/Pictures/Wallpaper/mountain-abstract.jpg"
-            gsettings set org.gnome.desktop.background picture-uri "file://$HOME/Pictures/Wallpaper/mountain-abstract.jpg"
+            wget -q -O "$HOME/Pictures/Wallpaper/blue_background.jpg" "https://iili.io/qrhi7ql.jpg"
+            gsettings set org.gnome.desktop.background picture-uri-dark "file://$HOME/Pictures/Wallpaper/blue_background.jpg"
+            gsettings set org.gnome.desktop.background picture-uri "file://$HOME/Pictures/Wallpaper/blue_background.jpg"
             clear
             sleep 1
             #FlatRemixTheme
